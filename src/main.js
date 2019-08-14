@@ -4,13 +4,15 @@
  * @Autor: kakachake
  * @Date: 2019-08-10 17:03:48
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-10 17:23:38
+ * @LastEditTime: 2019-08-14 21:48:00
  */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import Klement from '../module/index'
+// import Button from '../packages/button/index'
 
-
+Vue.use(Klement)
 Vue.config.productionTip = false
 
 new Vue({

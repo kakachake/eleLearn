@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-10 17:03:48
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-11 09:48:10
+ * @LastEditTime: 2019-08-14 21:41:31
  -->
 <template>
   <div class="hklo">
@@ -62,17 +62,13 @@
 </template>
 
 <script>
-import KButton from '../components/KButton'
-import KButtonGroup from '../components/KButton-group'
+// import KButton from 'pack/button/src/KButton'
+// import KButtonGroup from 'pack/button/src/KButton-group'
 
 export default {
   name: 'HkloWorld',
   props: {
     msg: String
-  },
-  components:{
-    KButton,
-    KButtonGroup
   },
   methods:{
     handelClick(e){

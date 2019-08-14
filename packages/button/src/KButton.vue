@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-10 17:05:42
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-11 09:55:28
+ * @LastEditTime: 2019-08-14 21:11:30
  -->
 <template>
     <button 
@@ -31,6 +31,7 @@
 
 <script>
 export default {
+    name: 'KButton',
     props:{
         type: {
             type: String,
@@ -64,5 +65,5 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-@import './style/lib/button.css';
+@import '../../theme/lib/button.css';
 </style>
