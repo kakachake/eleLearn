@@ -4,20 +4,21 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:33:59
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-15 18:51:39
+ * @LastEditTime: 2019-08-15 22:26:29
  -->
 <template>
 <div>
   <input
     class="k-picker-editor"
     @focus="handleFocus"
-    @blur="handleClose"
+    v-clickoutside="handleClose"
     />
 </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import Clickoutside from 'klement/utils/clickoutside'
 
 export default {
   props:{
@@ -30,11 +31,15 @@ export default {
     }
   },
 
+  directives: { Clickoutside },
+
   data(){
     return {
       pickerVisible: false
     }
   },
+
+
   watch:{
     pickerVisible(val) {
       if(this.readOnly || this.pickerDisabled) return ;

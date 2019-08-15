@@ -4,13 +4,13 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 21:25:53
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-15 21:30:43
+ * @LastEditTime: 2019-08-15 22:04:37
  */
-import Vue from 'vue';
-import { relative } from 'path';
  
 export const on = (function(){
     return function(element, event, handler){
-        if(element && event && handler)
+        if(element && event && handler){
+            element.addEventListener(event, handler, false); //禁止冒泡执行
+        }
     }
 })()

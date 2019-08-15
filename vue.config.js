@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-10 20:18:23
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-14 21:08:35
+ * @LastEditTime: 2019-08-15 21:57:58
  */
 const path = require('path');
 
@@ -17,6 +17,7 @@ module.exports = {
     config.resolve.alias
       .set('@', resolve('src'))
       .set('pack',resolve('packages'))
+      .set('klement', resolve('module'))
       // 这里只写了两个个，你可以自己再加，按这种格式.set('', resolve(''))
   }
 };
