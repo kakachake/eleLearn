@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-10 17:03:48
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-14 21:41:31
+ * @LastEditTime: 2019-08-15 11:37:55
  -->
 <template>
   <div class="hklo">
@@ -41,12 +41,12 @@
       <KButton type="danger" nativeType="button" plain round>危险按钮</KButton>
     </div>
     <div>
-      <KButton :loading="true" nativeType="button"  plain  circle></KButton>
-      <KButton type="primary" nativeType="button" plain circle></KButton>
-      <KButton type="success" nativeType="button" plain circle></KButton>
-      <KButton type="info" nativeType="button" plain circle></KButton>
-      <KButton type="warning" nativeType="button" plain circle></KButton>
-      <KButton type="danger" nativeType="button" plain circle></KButton>
+      <KButton nativeType="button"  icon="k-icon-search" plain  circle></KButton>
+      <KButton type="primary" nativeType="button" icon="k-icon-edit" plain circle></KButton>
+      <KButton type="success" nativeType="button" icon="k-icon-check" plain circle></KButton>
+      <KButton type="info" nativeType="button" icon="k-icon-message"  plain circle></KButton>
+      <KButton type="warning" nativeType="button" icon="k-icon-star-off"  plain circle></KButton>
+      <KButton type="danger" nativeType="button" icon="k-icon-message" plain circle></KButton>
     </div>
     <div>
       <k-button>默认按钮</k-button>
@@ -58,6 +58,32 @@
       <KButton type="primary" nativeType="button">主要按钮</KButton>
       <KButton type="success" nativeType="button">成功按钮</KButton>
     </KButtonGroup>
+    <div>
+      <KButton type="primary" nativeType="button" long>长按钮</KButton>
+    </div>
+    <div>
+      <k-link href="https://github.com/kakachake" target="_blank">默认链接</k-link>
+      <k-link type="primary">主要链接</k-link>
+      <k-link type="success">成功链接</k-link>
+      <k-link type="warning">警告链接</k-link>
+      <k-link type="danger">危险链接</k-link>
+      <k-link type="info">信息链接</k-link>
+    </div>
+    <div>禁用状态
+      <k-link disabled>默认链接</k-link>
+      <k-link type="primary" disabled>主要链接</k-link>
+      <k-link type="success" disabled>成功链接</k-link>
+      <k-link type="warning" disabled>警告链接</k-link>
+      <k-link type="danger" disabled>危险链接</k-link>
+      <k-link type="info" disabled>信息链接</k-link>
+    </div>
+    <div>
+      <k-link icon="k-icon-edit">编辑</k-link>
+      <k-link>查看<i class="k-icon-view k-icon--right"></i> </k-link>
+    </div>
+    <div>
+      <k-date-picker></k-date-picker>
+    </div>
   </div>
 </template>
 
@@ -66,7 +92,7 @@
 // import KButtonGroup from 'pack/button/src/KButton-group'
 
 export default {
-  name: 'HkloWorld',
+  name: 'HelloWorld',
   props: {
     msg: String
   },
@@ -94,5 +120,8 @@ li {
 }
 a {
   color: #42b983;
+}
+div{
+  margin-top: 10px;
 }
 </style>

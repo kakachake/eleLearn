@@ -4,15 +4,18 @@
  * @Autor: kakachake
  * @Date: 2019-08-14 21:30:01
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-14 21:51:53
+ * @LastEditTime: 2019-08-15 11:37:32
  */
 import Button from '../packages/button/index'
 import ButtonGroup from '../packages/button-group/index';
-
+import Link from '../packages/link/index'
+import DatePicker from '../packages/date-picker/index'
 
 const components = [
     Button,
-    ButtonGroup
+    ButtonGroup,
+    Link,
+    DatePicker
 ]
 
 const install = function(Vue) {
@@ -27,5 +30,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
     install,
-    Button
+    Button,
+    Link
 }

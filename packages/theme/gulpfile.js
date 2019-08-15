@@ -4,9 +4,9 @@
  * @Autor: kakachake
  * @Date: 2019-08-14 20:40:54
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-14 20:57:14
+ * @LastEditTime: 2019-08-15 10:16:50
  */
-const { series, src, dest } = require('gulp');
+const { series, src, dest, watch, lastRun} = require('gulp');
 const sass = require('gulp-sass');
 // const autoprefixer = require('gulp-autoprefixer');
 const cssmin = require('gulp-cssmin');
@@ -14,16 +14,18 @@ const cssmin = require('gulp-cssmin');
 
 
 function compile() {
-    return src('./src/*.scss')
+    return src('./src/*.scss', )
       .pipe(sass.sync())
     //   .pipe(cssmin())
       .pipe(dest('./lib'));
 }
 
 function copyfont() {
-    return src('./src/fonts/**')
+    return src('./src/fonts/**', { since: lastRun(copyfont) })
     //   .pipe(cssmin())
       .pipe(dest('./lib/fonts'));
 }
 
-exports.build = series(compile, copyfont);
+exports.build = function() {
+  watch(['./src/*.scss','./src/fonts/**' ], series(compile, copyfont));
+};

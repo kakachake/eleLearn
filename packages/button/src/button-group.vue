@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-11 09:44:10
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-14 21:07:07
+ * @LastEditTime: 2019-08-15 11:48:21
  -->
 <template>
   <div class="k-button-group">
@@ -18,5 +18,5 @@
 </script>
 <style lang="scss" scoped>
 
-@import '../../theme/lib/button.css';
+// @import '../../theme/lib/button.css';
 </style>

@@ -117,6 +117,9 @@
     border-radius: 20px;
     padding: 12px 23px;
   }
+  @include when(long) {
+    width: 100%;
+  }
   @include when(circle) {
     border-radius: 50%;
     padding: $--button-padding-vertical;

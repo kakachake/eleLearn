@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-10 17:05:42
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-14 21:11:30
+ * @LastEditTime: 2019-08-15 11:48:16
  -->
 <template>
     <button 
@@ -19,13 +19,14 @@
                 'is-plain': plain,
                 'is-disabled': disabled,
                 'is-circle': circle,
-                'is-round': round
+                'is-round': round,
+                'is-long':long
             }
         ]"
     >
         <i class="el-icon-loading" v-if="loading"></i>
         <i :class="icon" v-if="icon && !loading"></i>
-        <span><slot></slot></span>
+        <span v-if="$slots.default"><slot></slot></span>
     </button>
 </template>
 
@@ -51,7 +52,8 @@ export default {
         plain: Boolean,
         autofocus: Boolean,
         round: Boolean,
-        circle: Boolean
+        circle: Boolean,
+        long: Boolean
     },
     methods:{
         handleClick(evt){
@@ -65,5 +67,5 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-@import '../../theme/lib/button.css';
+// @import '../../theme/lib/button.css';
 </style>
