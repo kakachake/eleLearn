@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:38:21
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-16 17:56:15
+ * @LastEditTime: 2019-08-16 18:02:27
  -->
 <template>
 <transition name="k-zoom-in-top" @after-enter="handleEnter" @after-leave="handleLeave">
@@ -37,15 +37,15 @@
               :class="{ active: currentView === 'month' }">{{t(`el.datepicker.month${ month + 1 }`)}}</span>
             <button
               type="button"
-              
+              @click="nextYear"
+              v-show="currentView === 'date'"
               class="k-picker-panel__icon-btn k-date-picker__next-btn k-icon-d-arrow-right">
-            </button>
+            </button>          
             <button
               type="button"
-              
-              v-show="currentView === 'date'"
+              @click="nextMonth"
               class="k-picker-panel__icon-btn k-date-picker__next-btn k-icon-arrow-right">
-            </button>          
+            </button>
           </div>
           <div class="k-picker-panel__content">
               <date-table 
@@ -64,7 +64,7 @@
 
 <script>
 import DateTable from '../basic/date-table';
-import { getWeekNumber, prevYear, prevMonth, nextYear } from 'klement/utils/date-util'
+import { getWeekNumber, prevYear, prevMonth, nextYear , nextMonth} from 'klement/utils/date-util'
 import { t } from 'klement/locale/index'
 
 
@@ -105,8 +105,18 @@ export default {
           this.date = prevYear(this.date);
         }
       },
+      nextYear() {
+        if (this.currentView === 'year') {
+          this.date = nextYear(this.date, 10);
+        } else {
+          this.date = nextYear(this.date);
+        }
+      },
       prevMonth() {
         this.date = prevMonth(this.date)
+      },
+      nextMonth() {
+        this.date = nextMonth(this.date)
       }
   },
   computed: {
