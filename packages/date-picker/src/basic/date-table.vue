@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:38:33
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-16 14:00:12
+ * @LastEditTime: 2019-08-16 17:30:32
  -->
 <template>
 
@@ -20,8 +20,20 @@
             </tr>
             <tr 
             class="k-date-table__row"
+            v-for="(row, key) in rows"
+            :key = "key"
             >
-
+                <td 
+                v-for="(cell, key) in row"
+                :key = "key"
+                :class="getCellClasses(cell)"
+                >
+                    <div>
+                        <span>
+                            {{ cell.text }}
+                        </span>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -29,7 +41,7 @@
 </template>
 
 <script>
-import { getFirstDayOfMonth, getDayCountOfMonth, getStartDateOfMonth, nextDate } from 'klement/utils/date-util.js'
+import { getFirstDayOfMonth, getDayCountOfMonth, getStartDateOfMonth, nextDate, getDateTimestamp } from 'klement/utils/date-util.js'
 import { coerceTruthyValueToArray } from 'klement/utils/util.js'
 import { stat } from 'fs';
 
@@ -62,6 +74,22 @@ export default {
             default: false
         },
     },
+    methods:{
+        getCellClasses(cell){
+            
+            let classes = [];
+            if((cell.type === 'normal' || cell.type === 'today') && !cell.disabled) {
+                classes.push('available');
+                if(cell.type === 'today') {
+                    classes.push('today')
+                }
+            }else{
+                classes.push(cell.type);
+            }
+
+            return classes.join(' ')
+        }
+    },
     computed:{
         offsetDay(){
             const week = this.firstDayOfWeek;
@@ -86,6 +114,8 @@ export default {
         },
 
         rows() {
+            
+            
             const date = new Date(this.year, this.month, 1); //获取一号时间戳
             let day = getFirstDayOfMonth(date); //获取一号周几
             const dateCountOfMonth = getDayCountOfMonth(date.getFullYear(), date.getMonth());//获取当月的天数
@@ -95,11 +125,13 @@ export default {
 
             const offset = this.offsetDay;//获取偏移量，初始为周天在第一位
             const rows = this.tableRows;//获取初始数组
+            console.log(this.tableRows);
+            
             let count = 1;
             const startDate = this.startDate;//获取当前月一号所在周的上周的周天日期
             const disabledDate = this.disabledDate;
             const selectedDate = this.selectionMode === 'dates' ? coerceTruthyValueToArray(this.value) : []; //将选中的日期转为数组格式
-            const now = new Date().getTime() //获取当前日期
+            const now = getDateTimestamp(new Date()) //获取当前日期,精确到天
 
             for(let i = 0;i < 6; i++){
                 const row = rows[i];
@@ -108,10 +140,12 @@ export default {
                     //周数显示
                 }
                 for(let j = 0; j < 7; j++){
-                    let cell = row[this.showWeekNumber?j+1:j]
+                    let cell = row[this.showWeekNumber ? j + 1 : j];
                     if(!cell){
                         cell = { row: i, column: j, type: 'normal', inRange: false, start: false, end: false };
                     }
+
+                    cell.type = 'normal'
 
                     const index = i * 7 + j;
                     const time = nextDate(startDate, index - offset).getTime();
@@ -123,9 +157,29 @@ export default {
                     if (isToday) {
                         cell.type = 'today';
                     }
+
+                    if(i >= 0 && i <= 1){
+                        const numberOfDaysFromPreviousMonth = day + offset < 0 ? 7 + day + offset : day + offset;
+                        if( j + i * 7 >= numberOfDaysFromPreviousMonth) {
+                            cell.text = count++;
+                        }else{
+                            cell.text = dateCountOfLastMonth - (numberOfDaysFromPreviousMonth - j) + 1;
+                            cell.type = 'prev-month';
+                        }   
+                    }else{
+                        if(count <= dateCountOfMonth) {
+                            cell.text = count++;
+                        }else{
+                            cell.text = count++ - dateCountOfMonth;
+                            cell.type = 'next-month';
+                        }
+                    }
+                    this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
+                    // console.log("row=>>>>", row, count);
                 }
+            // console.log("rows=>>>>", rows, count);
             }
-            return row;
+            return rows;
         }
     }
 }

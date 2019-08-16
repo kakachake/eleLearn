@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-16 09:59:55
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-16 14:00:59
+ * @LastEditTime: 2019-08-16 17:57:34
  */
 
  /**
@@ -31,8 +31,44 @@ export const clearTime = function(date) {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 };
 
+export const modifyDate = function(date, y, m, d) {
+    return new Date(y, m, d, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
+};
 
+export const changeYearMonthAndClampDate = function(date, year, month) {
+    // clamp date to the number of days in `year`, `month`
+    // eg: (2010-1-31, 2010, 2) => 2010-2-28
+    const monthDate = Math.min(date.getDate(), getDayCountOfMonth(year, month));
+    return modifyDate(date, year, month, monthDate);
+};
   
+
+export const prevYear = function(date, amount = 1) {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    return changeYearMonthAndClampDate(date, year - amount, month);
+};
+
+export const nextYear = function (date, amount = 1) {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    return changeYearMonthAndClampDate(date, year + amount, month);
+}
+
+
+export const prevMonth = function(date, amount = 1){
+    const year = date.getFullYear();
+    const mouth = date.getMonth();
+    return changeYearMonthAndClampDate(date, year, mouth + amount)
+
+}
+
+export const nextMonth = function(date, amount = 1){
+    const year = date.getFullYear();
+    const mouth = date.getMonth();
+    return changeYearMonthAndClampDate(date, year, mouth + amount)
+
+}
 
 export const getDateTimestamp = function(time) {
     if (typeof time === 'number' || typeof time === 'string') {

@@ -1,5 +1,5 @@
 @import "../common/var";
-
+@import "../mixins/mixins";
 @include b(time-panel) {
   margin: 5px 0;
   border: solid 1px $--datepicker-border-color;

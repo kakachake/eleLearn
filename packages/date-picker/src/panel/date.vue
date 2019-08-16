@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:38:21
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-16 12:59:16
+ * @LastEditTime: 2019-08-16 17:56:15
  -->
 <template>
 <transition name="k-zoom-in-top" @after-enter="handleEnter" @after-leave="handleLeave">
@@ -16,12 +16,12 @@
           <div class="k-date-picker__header">
             <button
               type="button"
-              
+              @click="prevYear"
               class="k-picker-panel__icon-btn k-date-picker__prev-btn k-icon-d-arrow-left">
             </button>
             <button
               type="button"
-              
+              @click="prevMonth"
               v-show="currentView === 'date'"
               class="k-picker-panel__icon-btn k-date-picker__prev-btn k-icon-arrow-left">
             </button>
@@ -64,7 +64,7 @@
 
 <script>
 import DateTable from '../basic/date-table';
-import { getWeekNumber } from 'klement/utils/date-util'
+import { getWeekNumber, prevYear, prevMonth, nextYear } from 'klement/utils/date-util'
 import { t } from 'klement/locale/index'
 
 
@@ -97,6 +97,16 @@ export default {
       },
       t(...args){
         return t.apply(this, args);
+      },
+      prevYear() {
+        if (this.currentView === 'year') {
+          this.date = prevYear(this.date, 10);
+        } else {
+          this.date = prevYear(this.date);
+        }
+      },
+      prevMonth() {
+        this.date = prevMonth(this.date)
       }
   },
   computed: {

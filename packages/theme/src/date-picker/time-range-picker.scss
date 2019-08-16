@@ -1,5 +1,5 @@
 @import "../common/var";
-
+@import "../mixins/mixins";
 @include b(time-range-picker) {
   width: 354px;
   overflow: visible;
