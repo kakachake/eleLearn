@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-10 17:03:48
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-15 11:37:55
+ * @LastEditTime: 2019-08-17 14:04:33
  -->
 <template>
   <div class="hklo">
@@ -82,7 +82,7 @@
       <k-link>查看<i class="k-icon-view k-icon--right"></i> </k-link>
     </div>
     <div>
-      <k-date-picker></k-date-picker>
+      <k-date-picker v-model="value" @input="input"></k-date-picker>
     </div>
   </div>
 </template>
@@ -92,6 +92,11 @@
 // import KButtonGroup from 'pack/button/src/KButton-group'
 
 export default {
+  data(){
+    return {
+      value :''
+    }
+  },
   name: 'HelloWorld',
   props: {
     msg: String
@@ -99,6 +104,10 @@ export default {
   methods:{
     handelClick(e){
       console.log(e);
+      
+    },
+    input(e){
+      console.log('input=>>>>',e);
       
     }
   }

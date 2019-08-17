@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:33:59
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-17 11:32:06
+ * @LastEditTime: 2019-08-17 14:05:37
  -->
 <template>
 <div>
@@ -30,7 +30,8 @@ export default {
     disabled: {
 
     },
-    defaultValue:{}
+    defaultValue:{},
+    value:{}
   },
 
   directives: { Clickoutside },
@@ -51,10 +52,24 @@ export default {
         
       }else{
         this.hidePicker()
+        this.emitChange(this.value);
+        this.userInput = null;
+      }
+    },
+    parseValue: {
+      immediate: true,
+      handler(val) {
+        if(this.picker) {
+          this.picker.value = val;
+        }
       }
     }
   },
   methods:{
+    handleInput(e){
+      console.log('input=>>>>>',);
+      
+    },
     handleFocus(e){
       console.log(e);
       if(!this.pickerVisible){
@@ -72,6 +87,7 @@ export default {
         this.mountPicker()
       }
 
+      this.picker.value = this.parseValue
       this.pickerVisible = this.picker.visible = true;
     },
     hidePicker() {
@@ -85,14 +101,48 @@ export default {
       this.picker.defaultValue = this.defaultValue
       this.popperElm = this.picker.$el;
       console.log(this.popperElm);
+      this.picker.selectionMode = this.selectionMode;
+
       this.$el.appendChild(this.picker.$el)
-      
+
+      this.picker.$on('pick', (date = '', visible = false) => {
+        // console.log(date);
+        
+        this.userInput = null;
+        this.pickerVisible = this.picker.visible = visible
+        this.emitInput(date);
+      })
+    },
+    emitInput(val) {
+        const formatted = val;
+        this.$emit('input', formatted);
+        console.log(val);
+        
     }
   },
   computed:{
     pickerDisabled() {
       return this.disabled;
     },
+    selectionMode() {
+      if (this.type === 'week') {
+        return 'week';
+      } else if (this.type === 'month') {
+        return 'month';
+      } else if (this.type === 'year') {
+        return 'year';
+      } else if (this.type === 'dates') {
+        return 'dates';
+      }
+
+      return 'day';
+    },
+    displayValue(){
+      return this.parseValue
+    },
+    parseValue() {
+      return this.value
+    }
   }
 }
 

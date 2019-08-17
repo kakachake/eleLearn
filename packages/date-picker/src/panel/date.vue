@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:38:21
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-17 11:28:57
+ * @LastEditTime: 2019-08-17 14:08:36
  -->
 <template>
 <transition name="k-zoom-in-top" @after-enter="handleEnter" @after-leave="handleLeave">
@@ -96,6 +96,8 @@ export default {
   },
   methods:{
       emit(value, ...args) {
+        // console.log(value);
+        
         if(!value) {
           this.$emit('pick', value, ...args);
         }else if(Array.isArray(value)) {
@@ -107,9 +109,13 @@ export default {
         this.userInputTime = null;
       },
       handleDatePick(value) {
+        // console.log(value);
+        
         if(this.selectionMode === 'day') {
-          let newDate = this.value
+          let newDate = value
           this.date = newDate;
+          // console.log(this.date);
+          
           this.emit(this.date, this.showTime);
         }else if(this.selectionMode === 'dates'){
           this.emit(value, true) //设置true保持panel面板打开

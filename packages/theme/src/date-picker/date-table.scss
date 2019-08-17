@@ -98,7 +98,7 @@
       }
     }
 
-    &.current:not(.disabled) span {
+    &.current:not(.disabled) {
       color: $--color-white;
       background-color: $--datepicker-active-color;
     }

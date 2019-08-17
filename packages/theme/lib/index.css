@@ -2401,7 +2401,7 @@
       background-color: #F2F6FC; }
       .k-date-table td.in-range div:hover {
         background-color: #F2F6FC; }
-    .k-date-table td.current:not(.disabled) span {
+    .k-date-table td.current:not(.disabled) {
       color: #FFFFFF;
       background-color: #08c; }
     .k-date-table td.start-date div,

@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-16 09:59:55
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-16 20:25:11
+ * @LastEditTime: 2019-08-17 12:29:05
  */
 
  /**
@@ -29,6 +29,10 @@ export const isDate = function(date) {
   
 export const clearTime = function(date) {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+};
+
+export const clearMilliseconds = function(date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), 0);
 };
 
 export const modifyDate = function(date, y, m, d) {

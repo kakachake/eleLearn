@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:38:33
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-17 11:01:16
+ * @LastEditTime: 2019-08-17 14:18:54
  -->
 <template>
 
@@ -80,6 +80,12 @@ export default {
         },
     },
     methods:{
+        cellMatchesDate(cell, date) {
+            const value = new Date(date);
+            return this.year === value.getFullYear() &&
+            this.month === value.getMonth() &&
+            Number(cell.text) === value.getDate();
+        },
         getCellClasses(cell){
             
             let classes = [];
@@ -91,6 +97,15 @@ export default {
             }else{
                 classes.push(cell.type);
             }
+
+            if (cell.selected) {
+                classes.push('selected');
+            }
+
+            if (this.selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') && this.cellMatchesDate(cell, this.value)) {
+            classes.push('current');
+            }
+
 
             return classes.join(' ')
         },
@@ -116,10 +131,10 @@ export default {
             const cell = this.rows[row][column];
             
             if (cell.disabled) return;
-            console.log(cell);
+            // console.log(cell);
             
             const newDate = this.getDateOfCell(row, column);
-            console.log(newDate);
+            // console.log(newDate);
             
             if(this.selectionMode === 'day'){
                 this.$emit('pick', newDate)
@@ -181,6 +196,8 @@ export default {
             const startDate = this.startDate;//获取当前月一号所在周的上周的周天日期
             const disabledDate = this.disabledDate;
             const selectedDate = this.selectionMode === 'dates' ? coerceTruthyValueToArray(this.value) : []; //将选中的日期转为数组格式
+            console.log('selectedDate=>>>>>',selectedDate );
+            
             const now = getDateTimestamp(new Date()) //获取当前日期,精确到天
             const numberOfDaysFromPreviousMonth = this.numberOfDaysFromPreviousMonth;
             
