@@ -281,14 +281,14 @@
       box-sizing: border-box; }
     .k-date-table td span {
       width: 24px;
-      height: 24px;
+      height: 12px;
       display: block;
       margin: 0 auto;
-      line-height: 24px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      line-height: 12px;
       border-radius: 50%; }
+      .k-date-table td span.lunarday {
+        font-size: 10px;
+        font-weight: 400; }
     .k-date-table td.next-month, .k-date-table td.prev-month {
       color: #C0C4CC; }
     .k-date-table td.today {

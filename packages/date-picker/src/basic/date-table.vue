@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:38:33
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-16 17:30:32
+ * @LastEditTime: 2019-08-17 11:01:16
  -->
 <template>
 
@@ -12,6 +12,7 @@
         cellspacing="0"
         cellpadding="0"
         class="k-date-table"
+        @click="handleClick"
     >
         <tbody>
             <tr>
@@ -32,6 +33,9 @@
                         <span>
                             {{ cell.text }}
                         </span>
+                        <span class="lunarday">
+                            {{ cell.lunarday }}
+                        </span>
                     </div>
                 </td>
             </tr>
@@ -42,7 +46,8 @@
 
 <script>
 import { getFirstDayOfMonth, getDayCountOfMonth, getStartDateOfMonth, nextDate, getDateTimestamp } from 'klement/utils/date-util.js'
-import { coerceTruthyValueToArray } from 'klement/utils/util.js'
+import { getLunarDay } from 'klement/utils/getlunarday'
+import { coerceTruthyValueToArray, arrayFind } from 'klement/utils/util.js'
 import { stat } from 'fs';
 
 const WEEKS = ['日', '一', '二', '三', '四', '五', '六'];
@@ -56,7 +61,7 @@ export default {
     },
     props:{
         firstDayOfWeek: {
-            default: 7,
+            default: 1,
             type: Number,
             validator: val => val >= 1 && val <= 7
         },
@@ -88,6 +93,43 @@ export default {
             }
 
             return classes.join(' ')
+        },
+        getDateOfCell(row, column){
+            const offsetFromStart = row * 7 + column - this.numberOfDaysFromPreviousMonth;
+            return nextDate(new Date(this.year, this.month, 1), offsetFromStart);
+        },
+        
+        handleClick(){
+            let target = event.target;
+            
+            if (target.tagName === 'SPAN') {
+            target = target.parentNode.parentNode;
+            }
+            if (target.tagName === 'DIV') {
+            target = target.parentNode;
+            }
+
+            if (target.tagName !== 'TD') return;
+
+            const row = target.parentNode.rowIndex - 1;
+            const column = target.cellIndex;
+            const cell = this.rows[row][column];
+            
+            if (cell.disabled) return;
+            console.log(cell);
+            
+            const newDate = this.getDateOfCell(row, column);
+            console.log(newDate);
+            
+            if(this.selectionMode === 'day'){
+                this.$emit('pick', newDate)
+            }else if(this.selectionMode === 'dates') {
+                const value = this.value || [];
+                const newValue = cell.selected
+                    ? removeFromArray(value, date => date.getTime() === newDate.getTime)
+                    : [...value, newDate];
+                this.$emit('pick', newValue);
+            }
         }
     },
     computed:{
@@ -113,6 +155,12 @@ export default {
             return getStartDateOfMonth(this.year, this.month) //获取当前月一号所在周的上周的周天日期
         },
 
+        numberOfDaysFromPreviousMonth(){
+            const date = new Date(this.year, this.month, 1); //获取一号时间戳
+            let day = getFirstDayOfMonth(date); //获取一号周几
+            return day - this.firstDayOfWeek >= 0? day - this.firstDayOfWeek : 7 + day - this.firstDayOfWeek;
+        },
+
         rows() {
             
             
@@ -124,6 +172,8 @@ export default {
             day = (day === 0 ? 7 : day) //0为星期天
 
             const offset = this.offsetDay;//获取偏移量，初始为周天在第一位
+            console.log(offset);
+            
             const rows = this.tableRows;//获取初始数组
             console.log(this.tableRows);
             
@@ -132,7 +182,8 @@ export default {
             const disabledDate = this.disabledDate;
             const selectedDate = this.selectionMode === 'dates' ? coerceTruthyValueToArray(this.value) : []; //将选中的日期转为数组格式
             const now = getDateTimestamp(new Date()) //获取当前日期,精确到天
-
+            const numberOfDaysFromPreviousMonth = this.numberOfDaysFromPreviousMonth;
+            
             for(let i = 0;i < 6; i++){
                 const row = rows[i];
 
@@ -142,24 +193,25 @@ export default {
                 for(let j = 0; j < 7; j++){
                     let cell = row[this.showWeekNumber ? j + 1 : j];
                     if(!cell){
-                        cell = { row: i, column: j, type: 'normal', inRange: false, start: false, end: false };
+                        cell = { row: i, column: j, type: 'normal', inRange: false, start: false, end: false, lunarday:''};
                     }
 
                     cell.type = 'normal'
 
                     const index = i * 7 + j;
-                    const time = nextDate(startDate, index - offset).getTime();
+                    const time = nextDate(date, index - numberOfDaysFromPreviousMonth)
+                    cell.lunarday = getLunarDay(time.getFullYear(),time.getMonth()+1, time.getDate())
                     // cell.inRange = time >= getDateTimestamp(this.minDate) && time <= getDateTimestamp(this.maxDate); //时间范围
                     // cell.start = this.minDate && time === getDateTimestamp(this.minDate); //时间范围起点
                     // cell.end = this.maxDate && time === getDateTimestamp(this.maxDate); //时间范围终点
-                    const isToday = time === now;
+                    const isToday = time.getTime() === now;
 
                     if (isToday) {
                         cell.type = 'today';
                     }
 
                     if(i >= 0 && i <= 1){
-                        const numberOfDaysFromPreviousMonth = day + offset < 0 ? 7 + day + offset : day + offset;
+                        
                         if( j + i * 7 >= numberOfDaysFromPreviousMonth) {
                             cell.text = count++;
                         }else{
@@ -174,6 +226,9 @@ export default {
                             cell.type = 'next-month';
                         }
                     }
+                    let cellDate = new Date(time);
+                    cell.selected = arrayFind(selectedDate, date => date.getTime() === cellDate.getTime())
+                    
                     this.$set(row, this.showWeekNumber ? j + 1 : j, cell);
                     // console.log("row=>>>>", row, count);
                 }

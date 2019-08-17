@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:33:59
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-15 22:26:29
+ * @LastEditTime: 2019-08-17 11:32:06
  -->
 <template>
 <div>
@@ -12,6 +12,7 @@
     class="k-picker-editor"
     @focus="handleFocus"
     v-clickoutside="handleClose"
+    :value="displayValue"
     />
 </div>
 </template>
@@ -28,7 +29,8 @@ export default {
     },
     disabled: {
 
-    }
+    },
+    defaultValue:{}
   },
 
   directives: { Clickoutside },
@@ -80,6 +82,7 @@ export default {
     mountPicker(){
 
       this.picker = new Vue(this.panel).$mount();
+      this.picker.defaultValue = this.defaultValue
       this.popperElm = this.picker.$el;
       console.log(this.popperElm);
       this.$el.appendChild(this.picker.$el)

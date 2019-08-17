@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-16 09:59:55
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-16 17:57:34
+ * @LastEditTime: 2019-08-16 20:25:11
  */
 
  /**
@@ -59,7 +59,7 @@ export const nextYear = function (date, amount = 1) {
 export const prevMonth = function(date, amount = 1){
     const year = date.getFullYear();
     const mouth = date.getMonth();
-    return changeYearMonthAndClampDate(date, year, mouth + amount)
+    return changeYearMonthAndClampDate(date, year, mouth - amount)
 
 }
 

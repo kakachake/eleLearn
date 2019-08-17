@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:38:21
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-16 18:02:27
+ * @LastEditTime: 2019-08-17 11:28:57
  -->
 <template>
 <transition name="k-zoom-in-top" @after-enter="handleEnter" @after-leave="handleLeave">
@@ -51,6 +51,8 @@
               <date-table 
                 v-show = "currentView === 'date'"
                 :value = "value"
+                @pick="handleDatePick"
+                :first-day-of-week="firstDayOfWeek"
                 :date="date"
                 :default-value="defaultValue ? new Date(defaultValue) : null"
                 :disabled-date="disabledDate">
@@ -64,7 +66,7 @@
 
 <script>
 import DateTable from '../basic/date-table';
-import { getWeekNumber, prevYear, prevMonth, nextYear , nextMonth} from 'klement/utils/date-util'
+import { getWeekNumber, prevYear, prevMonth, nextYear , nextMonth, clearMilliseconds, clearTime} from 'klement/utils/date-util'
 import { t } from 'klement/locale/index'
 
 
@@ -78,6 +80,11 @@ export default {
       defaultValue: null,
       disabledDate: '',
       value: '',
+      firstDayOfWeek: 7,
+      selectionMode:'day',
+      showTime: false,
+      userInputDate: null,
+      userInputTime: null
     }
   },
   components:{
@@ -88,6 +95,26 @@ export default {
     
   },
   methods:{
+      emit(value, ...args) {
+        if(!value) {
+          this.$emit('pick', value, ...args);
+        }else if(Array.isArray(value)) {
+          const dates = value.map(date => this.showTime ? clearMilliseconds(date) : clearTime(date))
+        }else {
+          this.$emit('pick', this.showTime ? clearMilliseconds(value) : clearTime(value), ...args);
+        }
+        this.userInputDate = null;
+        this.userInputTime = null;
+      },
+      handleDatePick(value) {
+        if(this.selectionMode === 'day') {
+          let newDate = this.value
+          this.date = newDate;
+          this.emit(this.date, this.showTime);
+        }else if(this.selectionMode === 'dates'){
+          this.emit(value, true) //设置true保持panel面板打开
+        }
+      },
       handleEnter() {
         document.body.addEventListener('keydown', this.handleKeydown);
       },
