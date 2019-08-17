@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:38:33
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-17 14:18:54
+ * @LastEditTime: 2019-08-17 21:45:09
  -->
 <template>
 
@@ -178,6 +178,7 @@ export default {
 
         rows() {
             
+            console.log('date=>>>>>>',this.date);
             
             const date = new Date(this.year, this.month, 1); //获取一号时间戳
             let day = getFirstDayOfMonth(date); //获取一号周几
@@ -187,16 +188,16 @@ export default {
             day = (day === 0 ? 7 : day) //0为星期天
 
             const offset = this.offsetDay;//获取偏移量，初始为周天在第一位
-            console.log(offset);
+            // console.log(offset);
             
             const rows = this.tableRows;//获取初始数组
-            console.log(this.tableRows);
+            // console.log(this.tableRows);
             
             let count = 1;
             const startDate = this.startDate;//获取当前月一号所在周的上周的周天日期
             const disabledDate = this.disabledDate;
             const selectedDate = this.selectionMode === 'dates' ? coerceTruthyValueToArray(this.value) : []; //将选中的日期转为数组格式
-            console.log('selectedDate=>>>>>',selectedDate );
+            // console.log('selectedDate=>>>>>',selectedDate );
             
             const now = getDateTimestamp(new Date()) //获取当前日期,精确到天
             const numberOfDaysFromPreviousMonth = this.numberOfDaysFromPreviousMonth;
