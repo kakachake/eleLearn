@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:38:33
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-17 21:45:09
+ * @LastEditTime: 2019-08-18 12:50:38
  -->
 <template>
 
@@ -103,7 +103,7 @@ export default {
             }
 
             if (this.selectionMode === 'day' && (cell.type === 'normal' || cell.type === 'today') && this.cellMatchesDate(cell, this.value)) {
-            classes.push('current');
+                classes.push('current');
             }
 
 
@@ -178,7 +178,9 @@ export default {
 
         rows() {
             
+
             console.log('date=>>>>>>',this.date);
+            console.log('value=>>>>>>',this.value);
             
             const date = new Date(this.year, this.month, 1); //获取一号时间戳
             let day = getFirstDayOfMonth(date); //获取一号周几

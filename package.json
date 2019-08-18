@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "fecha": "^3.0.3",
     "popper.js": "^1.15.0",
     "vue": "^2.6.10"
   },

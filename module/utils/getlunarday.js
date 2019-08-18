@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-16 20:55:29
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-16 21:32:17
+ * @LastEditTime: 2019-08-18 13:29:33
  */
 
 var madd=new Array(12);
@@ -75,7 +75,7 @@ function e2c(){
         }
         if(isEnd) break;
     }
-    cYear=1921 + m;
+    cYear=1900 + m;
     cMonth=k-n+1;
     cDay=total;
     if(k==12){
@@ -114,7 +114,8 @@ function GetcDateString(){
     
 export function getLunarDay(solarYear,solarMonth,solarDay){
     //solarYear = solarYear<1900?(1900+solarYear):solarYear;
-    if(solarYear<1921 || solarYear>2100){
+    console.log(solarYear,solarMonth,solarDay)
+    if(solarYear<1900 || solarYear>2100){
         return "";
     }else{
         solarMonth = (parseInt(solarMonth)>0) ? (solarMonth-1) : 11;

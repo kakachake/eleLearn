@@ -4,8 +4,13 @@
  * @Autor: kakachake
  * @Date: 2019-08-16 09:59:55
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-17 12:29:05
+ * @LastEditTime: 2019-08-18 13:11:08
  */
+import fecha from './date'
+import { t } from '../locale'
+
+const weeks = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
  /**
   * 
@@ -18,6 +23,16 @@ export const prevDate = function(date, amount = 1) {
 
 export const nextDate = function(date, amount = 1) {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate() + amount);
+};
+
+export const getI18nSettings = () => {
+  return {
+    dayNamesShort: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
+    dayNames: weeks.map(week => t(`el.datepicker.weeks.${ week }`)),
+    monthNamesShort: months.map(month => t(`el.datepicker.months.${ month }`)),
+    monthNames: months.map((month, index) => t(`el.datepicker.month${ index + 1 }`)),
+    amPm: ['am', 'pm']
+  };
 };
 
 export const isDate = function(date) {
@@ -128,4 +143,17 @@ export const getDayCountOfMonth = function(year, month) { //获取当前月的�
     }
   
     return 31;
-  };
+};
+
+export const toDate = function(date) {
+  return isDate(date) ? new Date(date) : null;
+};
+
+export const formatDate = function(date, format) {
+  date = toDate(date);
+  if(!date) { return '' }
+  else if(format === 'timestamp') { return date.getTime() }
+  else {
+    return fecha.format(date, format || 'YYYY-MM-DD',  getI18nSettings())
+  }
+}
