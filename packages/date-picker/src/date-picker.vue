@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-15 11:33:59
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-18 12:57:51
+ * @LastEditTime: 2019-08-18 22:51:30
  -->
 <template>
 <div>
@@ -184,7 +184,9 @@ export default {
     },
     mountPicker(){
 
+      // this.picker = new (Vue.extend(this.panel))().$mount();
       this.picker = new Vue(this.panel).$mount();
+      console.log(this.picker)
       this.picker.defaultValue = this.defaultValue
       // this.popperElm = this.picker.$el;
       this.popperElm = this.picker.$el;

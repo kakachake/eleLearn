@@ -1,0 +1,154 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(message) {
+  // overflow: hidden;
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  transition: opacity 0.3s, transform .4s, top 0.4s;
+  // overflow: hidden;
+
+  @include m(center) {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+  @include e(main) {
+    overflow: hidden;
+    box-sizing: border-box;
+    font-size: $--message-font-size;
+    box-shadow: $--message-shadow;
+    border-radius: $--border-radius-base;
+    border-width: $--border-width-base;
+    border-style: $--border-style-base;
+    border-color: $--border-color-lighter;
+    background-color: $--message-background-color;
+    display: flex;
+    align-items: center;
+    padding: $--message-padding;
+
+    @include when(center) {
+      justify-content: center;
+    }
+  
+  
+    @include when(closable) {
+      .k-message__content {
+        padding-right: 16px;
+      }
+    }
+  
+    p {
+      margin: 0 0 0 10px;
+    }
+  
+    @include m(info) {
+      .k-message__content {
+        color: $--message-info-font-color;
+      }
+    }
+  
+    @include m(success) {
+      background-color: $--color-success-lighter;
+      border-color: $--color-success-light;
+  
+      .k-message__content {
+        color: $--message-success-font-color;
+      }
+    }
+  
+    @include m(warning) {
+      background-color: $--color-warning-lighter;
+      border-color: $--color-warning-light;
+  
+      .k-message__content {
+        color: $--message-warning-font-color;
+      }
+    }
+  
+    @include m(error) {
+      background-color: $--color-danger-lighter;
+      border-color: $--color-danger-light;
+  
+      .k-message__content {
+        color: $--message-danger-font-color;
+      }
+    }
+
+  
+    @include e(icon) {
+      
+    }
+  
+  
+    @include e(content) {
+      margin-left: 10px;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1;
+      &:focus {
+        outline-width: 0;
+      }
+    }
+  
+    @include e(closeBtn) {
+      cursor: pointer;
+      color: $--message-close-icon-color;
+      font-size: $--message-close-size;
+  
+      &:focus {
+        outline-width: 0;
+      }
+      &:hover {
+        color: $--message-close-hover-color;
+      }
+    }
+  
+    & .k-icon-success {
+      color: $--message-success-font-color;
+    }
+  
+    & .k-icon-error {
+      color: $--message-danger-font-color;
+    }
+  
+    & .k-icon-info {
+      color: $--message-info-font-color;
+    }
+  
+    & .k-icon-warning {
+      color: $--message-warning-font-color;
+    }
+  }
+ 
+}
+
+
+.k-message-fade-enter-active{
+  transition: .5s ease;
+  animation: myTopVis .5s;
+}
+
+.k-message-fade-leave-active{
+  transition: .5s ease;
+  animation: myTopUnvis .5s;
+}
+
+@keyframes myTopVis
+{
+  0%   {transform: scale(0)}
+  30%  {transform: scale(1.2)}
+  100% {transform: scale(1)}
+}
+
+@keyframes myTopUnvis
+{
+  0%   {transform: scale(1)}
+  30%  {transform: scale(1.2)}
+  100% {transform: scale(0)}
+}

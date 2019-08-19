@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-10 17:03:48
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-18 13:11:16
+ * @LastEditTime: 2019-08-19 14:15:49
  -->
 <template>
   <div class="hklo">
@@ -84,10 +84,17 @@
     <div>
       <k-date-picker v-model="value" format="" @input="input"></k-date-picker>
     </div>
+    <div>
+      <backTop :rate="4"></backTop>
+    </div>
+    <div>
+      <KButton type="primary" nativeType="button" @click="OpenMess()">打开message</KButton>
+    </div>
   </div>
 </template>
 
 <script>
+import { setTimeout } from 'timers';
 // import KButton from 'pack/button/src/KButton'
 // import KButtonGroup from 'pack/button/src/KButton-group'
 
@@ -109,6 +116,25 @@ export default {
     input(e){
       console.log('input=>>>>',e);
       
+    },
+    OpenMess(){
+      let message = this.$kMessage.loading({
+        message: '请稍等……',
+        duration: false,
+        site:'top',
+        onClose:()=>{
+          this.$kMessage.success({
+            message: '操作成功！',
+            showClose: true,
+            duration: 3000,
+            site:'center',
+          })
+        }
+      })
+      console.log(message);
+      setTimeout(()=>{
+        this.$kMessage.closeAll()
+      },1000)
     }
   }
 }
@@ -116,6 +142,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.hklo{
+  min-height: 20000px;
+}
 h3 {
   margin: 40px 0 0;
 }
@@ -132,5 +161,28 @@ a {
 }
 div{
   margin-top: 10px;
+}
+.top-enter-active{
+    transition: .5s ease;
+    animation: myTopVis .5s;
+}
+
+.top-leave-active{
+    transition: .5s ease;
+    animation: myTopUnvis .5s;
+}
+
+@keyframes myTopVis
+{
+    0%   {transform: scale(0)}
+    50%  {transform: scale(1.2)}
+    100% {transform: scale(1)}
+}
+
+@keyframes myTopUnvis
+{
+    0%   {transform: scale(1)}
+    50%  {transform: scale(1.2)}
+    100% {transform: scale(0)}
 }
 </style>

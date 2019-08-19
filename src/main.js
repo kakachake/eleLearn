@@ -4,14 +4,18 @@
  * @Autor: kakachake
  * @Date: 2019-08-10 17:03:48
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-15 11:48:35
+ * @LastEditTime: 2019-08-19 14:25:41
  */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import Klement from '../module/index'
 import '../packages/theme/lib/index.css' 
+import kMessage from '../message/index'
 // import Button from '../packages/button/index'
+
+
+Vue.prototype.$kMessage = kMessage;
 
 Vue.use(Klement)
 Vue.config.productionTip = false

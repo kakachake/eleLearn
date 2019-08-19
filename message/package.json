@@ -1,0 +1,19 @@
+{
+  "name": "kmessage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "thirtyfour_city",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  },
+  "dependencies": {
+    "gulp-cssmin": "^0.2.0",
+    "gulp-uglify": "^3.0.2"
+  }
+}

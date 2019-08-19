@@ -1,0 +1,344 @@
+/* BEM support Func
+ -------------------------- */
+/* Element Chalk Variables */
+/* Transition
+-------------------------- */
+/* Color
+-------------------------- */
+/* 53a8ff */
+/* 66b1ff */
+/* 79bbff */
+/* 8cc5ff */
+/* a0cfff */
+/* b3d8ff */
+/* c6e2ff */
+/* d9ecff */
+/* ecf5ff */
+/* Link
+-------------------------- */
+/* Border
+-------------------------- */
+/* Fill
+-------------------------- */
+/* Typography
+-------------------------- */
+/* Size
+-------------------------- */
+/* z-index
+-------------------------- */
+/* Disable base
+-------------------------- */
+/* Icon
+-------------------------- */
+/* Checkbox
+-------------------------- */
+/* Radio
+-------------------------- */
+/* Select
+-------------------------- */
+/* Alert
+-------------------------- */
+/* MessageBox
+-------------------------- */
+/* Message
+-------------------------- */
+/* Notification
+-------------------------- */
+/* Input
+-------------------------- */
+/* Cascader
+-------------------------- */
+/* Group
+-------------------------- */
+/* Tab
+-------------------------- */
+/* Button
+-------------------------- */
+/* cascader
+-------------------------- */
+/* Switch
+-------------------------- */
+/* Dialog
+-------------------------- */
+/* Table
+-------------------------- */
+/* Pagination
+-------------------------- */
+/* Popup
+-------------------------- */
+/* Popover
+-------------------------- */
+/* Tooltip
+-------------------------- */
+/* Tag
+-------------------------- */
+/* Tree
+-------------------------- */
+/* Dropdown
+-------------------------- */
+/* Badge
+-------------------------- */
+/* Card
+--------------------------*/
+/* Slider
+--------------------------*/
+/* Steps
+--------------------------*/
+/* Menu
+--------------------------*/
+/* Rate
+--------------------------*/
+/* DatePicker
+--------------------------*/
+/* Loading
+--------------------------*/
+/* Scrollbar
+--------------------------*/
+/* Carousel
+--------------------------*/
+/* Collapse
+--------------------------*/
+/* Transfer
+--------------------------*/
+/* Header
+  --------------------------*/
+/* Footer
+--------------------------*/
+/* Main
+--------------------------*/
+/* Timeline
+--------------------------*/
+/* Backtop
+--------------------------*/
+/* Link
+--------------------------*/
+/* Calendar
+--------------------------*/
+/* Form
+-------------------------- */
+/* Avatar
+--------------------------*/
+/* Break-point
+--------------------------*/
+/* Break-points
+ -------------------------- */
+/* Scrollbar
+ -------------------------- */
+/* Placeholder
+ -------------------------- */
+/* BEM
+ -------------------------- */
+/* Element Chalk Variables */
+/* Transition
+-------------------------- */
+/* Color
+-------------------------- */
+/* 53a8ff */
+/* 66b1ff */
+/* 79bbff */
+/* 8cc5ff */
+/* a0cfff */
+/* b3d8ff */
+/* c6e2ff */
+/* d9ecff */
+/* ecf5ff */
+/* Link
+-------------------------- */
+/* Border
+-------------------------- */
+/* Fill
+-------------------------- */
+/* Typography
+-------------------------- */
+/* Size
+-------------------------- */
+/* z-index
+-------------------------- */
+/* Disable base
+-------------------------- */
+/* Icon
+-------------------------- */
+/* Checkbox
+-------------------------- */
+/* Radio
+-------------------------- */
+/* Select
+-------------------------- */
+/* Alert
+-------------------------- */
+/* MessageBox
+-------------------------- */
+/* Message
+-------------------------- */
+/* Notification
+-------------------------- */
+/* Input
+-------------------------- */
+/* Cascader
+-------------------------- */
+/* Group
+-------------------------- */
+/* Tab
+-------------------------- */
+/* Button
+-------------------------- */
+/* cascader
+-------------------------- */
+/* Switch
+-------------------------- */
+/* Dialog
+-------------------------- */
+/* Table
+-------------------------- */
+/* Pagination
+-------------------------- */
+/* Popup
+-------------------------- */
+/* Popover
+-------------------------- */
+/* Tooltip
+-------------------------- */
+/* Tag
+-------------------------- */
+/* Tree
+-------------------------- */
+/* Dropdown
+-------------------------- */
+/* Badge
+-------------------------- */
+/* Card
+--------------------------*/
+/* Slider
+--------------------------*/
+/* Steps
+--------------------------*/
+/* Menu
+--------------------------*/
+/* Rate
+--------------------------*/
+/* DatePicker
+--------------------------*/
+/* Loading
+--------------------------*/
+/* Scrollbar
+--------------------------*/
+/* Carousel
+--------------------------*/
+/* Collapse
+--------------------------*/
+/* Transfer
+--------------------------*/
+/* Header
+  --------------------------*/
+/* Footer
+--------------------------*/
+/* Main
+--------------------------*/
+/* Timeline
+--------------------------*/
+/* Backtop
+--------------------------*/
+/* Link
+--------------------------*/
+/* Calendar
+--------------------------*/
+/* Form
+-------------------------- */
+/* Avatar
+--------------------------*/
+/* Break-point
+--------------------------*/
+.k-message {
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  transition: opacity 0.3s, transform .4s, top 0.4s; }
+  .k-message--center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+  .k-message__main {
+    overflow: hidden;
+    box-sizing: border-box;
+    font-size: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #EBEEF5;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 10px 10px 10px; }
+    .k-message__main.is-center {
+      justify-content: center; }
+    .k-message__main.is-closable .k-message__content {
+      padding-right: 16px; }
+    .k-message__main p {
+      margin: 0 0 0 10px; }
+    .k-message__main--info .k-message__content {
+      color: #27a9e3; }
+    .k-message__main--success {
+      background-color: #f0f9eb;
+      border-color: #e1f3d8; }
+      .k-message__main--success .k-message__content {
+        color: #67C23A; }
+    .k-message__main--warning {
+      background-color: #fdf6ec;
+      border-color: #faecd8; }
+      .k-message__main--warning .k-message__content {
+        color: #E6A23C; }
+    .k-message__main--error {
+      background-color: #fbeeea;
+      border-color: #f8ddd5; }
+      .k-message__main--error .k-message__content {
+        color: #da542e; }
+    .k-message__content {
+      margin-left: 10px;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1; }
+      .k-message__content:focus {
+        outline-width: 0; }
+    .k-message__closeBtn {
+      cursor: pointer;
+      color: #C0C4CC;
+      font-size: 16px; }
+      .k-message__closeBtn:focus {
+        outline-width: 0; }
+      .k-message__closeBtn:hover {
+        color: #909399; }
+    .k-message__main .k-icon-success {
+      color: #67C23A; }
+    .k-message__main .k-icon-error {
+      color: #da542e; }
+    .k-message__main .k-icon-info {
+      color: #27a9e3; }
+    .k-message__main .k-icon-warning {
+      color: #E6A23C; }
+
+.k-message-fade-enter-active {
+  transition: .5s ease;
+  animation: myTopVis .5s; }
+
+.k-message-fade-leave-active {
+  transition: .5s ease;
+  animation: myTopUnvis .5s; }
+
+@keyframes myTopVis {
+  0% {
+    transform: scale(0); }
+  30% {
+    transform: scale(1.2); }
+  100% {
+    transform: scale(1); } }
+
+@keyframes myTopUnvis {
+  0% {
+    transform: scale(1); }
+  30% {
+    transform: scale(1.2); }
+  100% {
+    transform: scale(0); } }
