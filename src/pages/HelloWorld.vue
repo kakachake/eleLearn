@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-10 17:03:48
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-20 10:03:43
+ * @LastEditTime: 2019-08-20 11:38:53
  -->
 <template>
   <div class="hklo">
@@ -91,7 +91,14 @@
       <KButton type="primary" nativeType="button" @click="OpenMess()">打开message</KButton>
     </div>
     <div>
-      <kRadio type="primary" nativeType="button" @click="OpenMess()">打开message</kRadio>
+      <kRadio v-model= "label" label="1" >选项一</kRadio>
+      <kRadio v-model= "label" label="2" >选项二</kRadio>
+    </div>
+    <div>
+      <kRadioGroup v-model= "label">
+        <kRadio  label="1" >选项一</kRadio>
+        <kRadio  label="2" >选项二</kRadio>
+      </kRadioGroup>
     </div>
   </div>
 </template>
@@ -104,7 +111,8 @@ import { setTimeout } from 'timers';
 export default {
   data(){
     return {
-      value :''
+      value :'',
+      label: '1'
     }
   },
   name: 'HelloWorld',
