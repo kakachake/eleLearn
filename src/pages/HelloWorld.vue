@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-10 17:03:48
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-19 14:15:49
+ * @LastEditTime: 2019-08-20 10:03:43
  -->
 <template>
   <div class="hklo">
@@ -89,6 +89,9 @@
     </div>
     <div>
       <KButton type="primary" nativeType="button" @click="OpenMess()">打开message</KButton>
+    </div>
+    <div>
+      <kRadio type="primary" nativeType="button" @click="OpenMess()">打开message</kRadio>
     </div>
   </div>
 </template>

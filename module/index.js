@@ -4,7 +4,7 @@
  * @Autor: kakachake
  * @Date: 2019-08-14 21:30:01
  * @LastEditors: kakachake
- * @LastEditTime: 2019-08-19 12:26:59
+ * @LastEditTime: 2019-08-20 10:03:23
  */
 import Button from '../packages/button/index';
 import ButtonGroup from '../packages/button-group/index';
@@ -12,6 +12,7 @@ import Link from '../packages/link/index';
 import DatePicker from '../packages/date-picker/index';
 import BackTop from '../packages/backtop/index';
 import Message from '../packages/message/index';
+import Radio from '../packages/radio/index';
 
 const components = [
     Button,
@@ -19,7 +20,8 @@ const components = [
     Link,
     DatePicker,
     BackTop,
-    Message
+    Message,
+    Radio
 ]
 
 const install = function(Vue) {
@@ -38,5 +40,6 @@ export default {
     Button,
     Link,
     BackTop,
-    DatePicker
+    DatePicker,
+    Radio
 }
